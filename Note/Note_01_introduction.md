@@ -4,7 +4,7 @@
 
 Goal: Students gain an understanding of the theoretical and practical concepts of computer vision using deep neural networks and graphical models. A strong focus is put on 3D vision. After this course, students should be able to develop and train computer vision models, reproduce research results and conduct original research.
 
-Course website: https://uni-tuebingen.de/de/203146
+Course website: <https://uni-tuebingen.de/de/203146>
 
 Exercises are offered every 2 weeks, 6 assignments in total
 
