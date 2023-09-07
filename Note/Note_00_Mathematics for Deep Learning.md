@@ -75,4 +75,26 @@ $$A A^T = U D V^T V D U^T = U D^T D U^T = U D^2 U^T$$
 
 > PCA is a technique for analyzing large high-dimensional datasets
 
-## 
+## Probability
+
+To do
+
+## Information and Entropy
+
+To satisfy all requirements, we define the self-information of an event $X = x$ as
+
+$$I(x) = -\log P(x)$$ [unit:nat]
+
+> **Self-information** is also interpreted as quantifying the level of “surprise”
+> When using base-2 logarithms, units are called “bits” or “shannons”
+
+## The Argmin and Argmax Operators
+
+Let $\mathcal{X}$ be a set and $f: \mathcal{X} \rightarrow \mathbb{R}$ be a function. The **argmin** of $f$ is defined as
+
+$$\arg \min_{x \in \mathcal{X}} f(x) = \{x \in \mathcal{X} | f(x) = \min_{x' \in \mathcal{X}} f(x')\}$$
+
+The **argmax** of $f$ is defined as
+
+$$\arg \max_{x \in \mathcal{X}} f(x) = \{x \in \mathcal{X} | f(x) = \max_{x' \in \mathcal{X}} f(x')\}$$
+
