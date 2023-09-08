@@ -1,12 +1,12 @@
 # Image_Formation
 
-## Primitives and Transformations
+## 2.1 Primitives and Transformations
 
 Geometric primitives(几何图元) are the basic building blocks used to describe 3D shapes, such as points, lines, planes, and polygons.
 
-## 2D Primitives
+### 2D Primitives
 
-### 2D Points
+#### 2D Points
 
 **2D points** can be written in **inhomogeneous coordinates**(非齐次坐标) as
 
@@ -28,7 +28,7 @@ where $\overline{x}$ is the **augmented vector**(增广向量) of $\mathbf{x}$.
 > We say augmented vector $\overline{\mathbf{x} }$ for all homogeneous vectors which last coordinate is equal to 1.
 > Special vector: Homogeneous points whose last element is $\widetilde{w}=0$ are called **ideal points** or **points at infinity**. These points can’t be represented with inhomogeneous coordinates!
 
-### 2D Lines
+#### 2D Lines
 
 **2D lines** can also be expressed using **homogeneous coordinates**(齐次坐标) $\mathbf{\widetilde{l}}=(a,b,c)^T$ : $$\{\mathbf{\overline{x}}|{\mathbf{\overline{x}}}^T\mathbf{\widetilde{l}}=0\} \Leftrightarrow \{x,y | ax+by+c=0\}$$
 
@@ -39,7 +39,7 @@ where $\overline{x}$ is the **augmented vector**(增广向量) of $\mathbf{x}$.
 
 > An exception is the **line at infinity** $\mathbf{\widetilde{l}}_{\infty}=(0,0,1)^T$, which passes through all ideal points.
 
-### 2D Line Arithmetic
+#### 2D Line Arithmetic
 
 In homogeneous coordinates, **the intersection of two lines** is given by:
 $$\mathbf{\overline{x}}=\mathbf{\widetilde{l}}_1\times \mathbf{\widetilde{l}}_2$$
@@ -49,7 +49,7 @@ where $\times$ is the **cross product** of two vectors.
 Similarly, **the intersection of two points** is given by:
 $$\mathbf{\widetilde{l}}=\mathbf{\overline{x}}_1\times \mathbf{\overline{x}}_2$$
 
-### 2D Conics(二次曲线)
+#### 2D Conics(二次曲线)
 
 More complex algebraic objects can be represented using **polynomial homogeneous equations**. For example, **conic sections** (arising as the intersection of a plane and a 3D cone) can be written using quadric equations:
 
@@ -57,9 +57,9 @@ $$\mathbf{\overline{x}}^T\mathbf{Q}\mathbf{\overline{x}}=0$$
 
 ![conics](./pics/02_conic_surface.png)
 
-## 3D Primitives
+### 3D Primitives
 
-### 3D Points
+#### 3D Points
 
 **3D points** can be written in **inhomogeneous coordinates** as
 $$\mathbf{x}=(x,y,z)^T\in \mathbb{R}^3$$
@@ -68,7 +68,7 @@ $$\widetilde{\mathbf{x}}=(\widetilde{x},\widetilde{y},\widetilde{z},\widetilde{w
 
 where $\mathbb{P}^3(=\mathbb{R}^4)$ is the **projective space**.
 
-### 3D Planes
+#### 3D Planes
 
 **3D planes** can be expressed using homogeneous coordinates $\mathbf{\widetilde{m}}=(a,b,c,d)^T$:
 $$\{\mathbf{\overline{x}}|{\mathbf{\overline{x}}}^T\mathbf{\widetilde{m}}=0\} \Leftrightarrow \{x,y,z | ax+by+cz+d=0\}$$
@@ -78,7 +78,7 @@ $$\{\mathbf{\overline{x}}|{\mathbf{\overline{x}}}^T\mathbf{\widetilde{m}}=0\} \L
 
 > An exception is the **plane at infinity** $\mathbf{\widetilde{m}}_{\infty}=(0,0,0,1)^T$, which passes through all ideal points.
 
-### 3D Lines
+#### 3D Lines
 
 **3D lines** are less elegant than either 2D lines or 3D planes. One possible representation
 is to express points on a line as a **linear combination** of two points $\mathbf{p}$ and $\mathbf{q}$ on the line:
@@ -88,7 +88,7 @@ $$\{\mathbf{x}|\mathbf{x}=(1-\lambda)\mathbf{p}+\lambda\mathbf{q},\lambda\in \ma
 However, this representation uses 6 parameters($\mathbf{p}$和$\mathbf{q}$分别三个参数) for 4 degrees of freedom(一个点(3个不自由度)+方向(1个不自由度)).
 > 所以可以用**two-plane parameterization**（两平面参数化）来表示3D line.
 
-### 3D Quadrics(二次曲面)
+#### 3D Quadrics(二次曲面)
 
 The 3D analog of 2D conics is a **quadric surface**:
 
@@ -98,11 +98,11 @@ $$\mathbf{\overline{x}}^T\mathbf{Q}\mathbf{\overline{x}}=0$$
 
 **Superquadrics**: generalization of quadrics
 
-## 2D Transformations
+### 2D Transformations
 
 ![2D transformations](./pics/02_2D_Transformations.png)
 
-### Translation
+#### Translation
 
 **Translation**: (2D Translation of the Input, 2 DoF(两个自由度: $t_x$和$t_y$))
 
@@ -111,7 +111,7 @@ $$\mathbf{x}'=\mathbf{x}+\mathbf{t} \Leftrightarrow \begin{pmatrix}x'\\y'\\1\end
 > - Using homogeneous representations allows to chain/invert transformations.
 > - Augmented vectors $\mathbf{\overline{x}}$ can always be replaced by general homogeneous ones $\widetilde{\mathbf{x}}$.
 
-### Euclidean
+#### Euclidean
 
 **Euclidean**: (2D Translation + 2D Rotation, 3 DoF)
 
@@ -120,7 +120,7 @@ $$\mathbf{x}'=\mathbf{R}\mathbf{x}+\mathbf{t} \Leftrightarrow \begin{pmatrix}x'\
 > - $\mathbf{R} \in SO(2)$: **special orthogonal group** of 2D rotations,which is an **orthogonal rotation matrix** with $\mathbf{R}^T\mathbf{R}=\mathbf{I}$ and $\det(\mathbf{R})=1$.
 > - Euclidean transformations preserve Euclidean distances
 
-### Similarity
+#### Similarity
 
 **Similarity**: (2D Translation + Scaled 2D Rotation, 4 DoF)
 
@@ -129,7 +129,7 @@ $$\mathbf{x}'=s\mathbf{R}\mathbf{x}+\mathbf{t} \Leftrightarrow \begin{pmatrix}x'
 > - $s$ is the **scale factor**.
 > - The similarity transform preserves angles between lines
 
-### Affine
+#### Affine
 
 **Affine**: (2D Translation + 2D Rotation + 2D Shear, 6 DoF)
 
@@ -138,7 +138,7 @@ $$\mathbf{x}'=\mathbf{A}\mathbf{x}+\mathbf{t} \Leftrightarrow \begin{pmatrix}x'\
 > - $\mathbf{A}$ is an **arbitrary 2D matrix**.
 > - Parallel lines remain parallel under affine transformations
 
-### Projective
+#### Projective
 
 **Projective**: (2D Translation + 2D Rotation + 2D Shear + 2D Homography, 8 DoF)（对同构矩阵整体乘以一个常数并不改变射影变换,所以可以让其中一个元素取任意定值(例如取1),等价去掉一个自由度）
 
@@ -147,7 +147,7 @@ $$\mathbf{\widetilde{x}}'=\mathbf{\widetilde{H}}\mathbf{\widetilde{x}} \Leftrigh
 > - $\mathbf{\widetilde{H}}$ is an **arbitrary homogeneous 3x3 matrix**.
 > - Projective transformations preserve straight lines
 
-### 2D Transformations on Co-vectors
+#### 2D Transformations on Co-vectors
 
 Consider a **covector** $\mathbf{\widetilde{l}}=(a,b,c)^T$ representing a 2D line. How does it transform under a 2D transformation $\mathbf{H}$?
 
@@ -168,7 +168,7 @@ which implies:
 $$\mathbf{\widetilde{l}'}=\mathbf{H}^{-T}\mathbf{\widetilde{l}}$$
 > Thus, the action of a projective transformation on a co-vector such as a 2D line or 3D normal can be represented by the transposed inverse of the matrix.
 
-### Overview of 2D Transformations
+#### Overview of 2D Transformations
 
 ![2D transformations](./pics/02_2D_Transformations.png)
 
@@ -183,7 +183,7 @@ $$\mathbf{\widetilde{l}'}=\mathbf{H}^{-T}\mathbf{\widetilde{l}}$$
 > - Interpret as restricted $3 × 3$ matrices operating on 2D homogeneous coordinates
 > - Transformations preserve properties below
 
-### Overview of 3D Transformations
+#### Overview of 3D Transformations
 
 | Transformation | DoF | Preserves | Matrix |
 | :---: | :---: | :---: | :---: |
@@ -197,7 +197,7 @@ $$\mathbf{\widetilde{l}'}=\mathbf{H}^{-T}\mathbf{\widetilde{l}}$$
 > - $3 × 4$ matrices are extended with a fourth $\begin{bmatrix}\mathbf{0}^T&1\end{bmatrix}$ row for homogeneous transforms.
 > - Transformations preserve properties below (similarity: parallelism, straight lines)
 
-### Direct Linear Transform for Homography Estimation
+#### Direct Linear Transform for Homography Estimation
 
 > 用直接线性变换(DLT)估计单应性矩阵(Homography Matrix)
 
@@ -208,7 +208,7 @@ How can we estimate a homography from a set of 2D correspondences?
 >   - $\mathbf{x}'_i$ is the corresponding point in the second image
 > - Homography: $\mathbf{\widetilde{x}}'_i=\mathbf{\widetilde{H}}\mathbf{\widetilde{x}}_i$
 
-Let $\mathcal{X}=\{\mathbf{\widetilde{x},\widetilde{x}'}\}$ denote a set of N 2D-to-2D correspondences related by $\mathbf{\widetilde{x}}'_i=\mathbf{\widetilde{H}}\mathbf{\widetilde{x}}_i$.As the correspondence vectors are homogeneous, they have **the same direction but differ in magnitude**.
+Let $\mathcal{X}=\{\mathbf{\widetilde{x}_i,\widetilde{x}'_i}\}_{i=1}^N$denote a set of $N$ 2D-to-2D correspondences related by $\mathbf{\widetilde{x}}'_i=\mathbf{\widetilde{H}}\mathbf{\widetilde{x}}_i$.As the correspondence vectors are homogeneous, they have **the same direction but differ in magnitude**.
 
 > Why to say "the same direction but differ in magnitude"?
 > See the following picture:
@@ -250,4 +250,129 @@ $
 > - 这样就可以用左边的数据来估计 $\mathbf{H}$ 了。
 > - 最后一行的三个方程是冗余的，因为$-\widetilde{w}'_iR_3 = \widetilde{x}'_i R_1 + \widetilde{y}'_i R_2$。
 
-Each point correspondence yields two equations. Stacking all equations into a 2N × 9 dimensional matrix A leads to the following constrained least squares problem
+Each point correspondence yields two equations. Stacking all equations into a $2N × 9$(一组有两个方程，列数均为9) dimensional matrix $\mathbf{A}$ leads to the following **constrained least squares problem**
+
+由于误差的存在，上式可能不等于0，所以用最小二乘法来估计 $\mathbf{H}$:
+
+令 $\mathbf{A} \widetilde{\mathbf{h}} = \omega$
+
+$\Omega = \omega^T \omega $
+
+求解 $\widetilde{\mathbf{h}}$ 使得 $\Omega$ 最小也就是
+
+$$\widetilde{\mathbf{h}}^*=\arg\min_{\widetilde{\mathbf{h}}}\Omega + \lambda (\|\widetilde{\mathbf{h}}\|^2-1)=\arg\min_{\widetilde{\mathbf{h}}}\|\mathbf{A}\widetilde{\mathbf{h}}\|^2+\lambda (\|\widetilde{\mathbf{h}}\|^2-1)$$
+
+其中 $\widetilde{\mathbf{h}}^*$ 是 $\mathbf{H}$ 的最小二乘解。
+
+where $\lambda$ is a Lagrange multiplier(拉格朗日乘子) to enforce the constraint $\|\widetilde{\mathbf{h}}\|^2=1$.
+
+The solution to the above optimization problem is the **singular vector** corresponding to the smallest singular value of $\mathbf{A}$.(i.e., the last column of $V$ when decomposing $A = UDV^T$ , see also Deep Learning lecture 11.2). The resulting algorithm is called **Direct Linear Transformation**.
+
+## 2.2 Geometric Image Formation
+
+### Basic camera models
+
+**Physical Camera Model**
+![Physical Camera Model](./pics/02_physical_camera_model.png)
+
+**Mathematical Camera Model**
+![Mathematical Camera Model](./pics/02_mathematical_camera_model.png)
+
+### Projection models
+
+#### Orthographic Projection*
+
+![Orthographic Projection](./pics/02_orthographic_projection.png)
+
+An **orthographic projection** simply **drops the z component** of the 3D point in camera coordinates $\mathbf{x}_c$ to obtain the corresponding 2D point on the image plane (= screen) $\mathbf{x}_s$.
+
+![Orthographic Projection](./pics/02_orthographic_projection_2.png)
+
+$$\mathbf{x}_s=\begin{bmatrix}1&0&0\\0&1&0\end{bmatrix}\mathbf{x}_c
+\Leftrightarrow \overline{\mathbf{x}}_s=\begin{bmatrix}1&0&0&0\\0&1&0&0\\0&0&0&1\end{bmatrix}\overline{\mathbf{x}}_c$$
+
+> - remember that $\overline{\mathbf{x}}_c$ is the augmented vector of $\mathbf{x}_c$.
+> - Orthography is exact for telecentric lenses and an approximation for telephoto lenses. After projection the distance of the 3D point from the image **can’t be recovered**
+
+##### Scaled Orthographic Projection
+
+In practice, world coordinates (which may measure dimensions in meters) must be scaled to fit onto an image sensor (measuring in pixels) ⇒ **scaled orthography**:
+
+$$\mathbf{x}_s=\begin{bmatrix}s&0&0\\0&s&0\end{bmatrix}\mathbf{x}_c
+\Leftrightarrow \overline{\mathbf{x}}_s=\begin{bmatrix}s&0&0&0\\0&s&0&0\\0&0&0&1\end{bmatrix}\overline{\mathbf{x}}_c$$
+
+> The unit for s is px/m or px/mm to convert metric 3D points into pixels
+
+Under orthography, structure and motion can be estimated simultaneously using factorization methods (e.g., via singular value decomposition).
+
+#### Perspective Projection**
+
+![Perspective Projection](./pics/02_perspective_projection.png)
+
+For perspective projection, we can use the following relationship (which is just from the principle of equal triangles):
+$$\frac{x_s}{f}=\frac{x_c}{z_c}$$
+
+![Perspective Projection](./pics/02_Perspective_projection_2.png)
+
+In **perspective projection**, 3D points in camera coordinates are mapped to the image plane by **dividing** them **by their z component** and multiplying with the focal length:
+
+$$\begin{pmatrix}x_s\\y_s\end{pmatrix}=\begin{pmatrix}fx_c/z_c\\fy_c/z_c\end{pmatrix} \Leftrightarrow \widetilde{\mathbf{x}}_s=\begin{bmatrix}f&0&0\\0&f&0\\0&0&1\end{bmatrix}\overline{\mathbf{x}}_c$$
+
+> - Note that this projection is **linear** when using **homogeneous** coordinates. After the projection it is not possible to recover the distance of the 3D point from the image.
+> - Remark: The unit for $f$ is px (=pixels) to convert metric 3D points into pixels.
+
+##### Principal Point Offset
+
+Usually in practice, we compute the **principal point offset** to derive a coordinate system for the image plane that is much more convenient as it does not include negative values.
+
+1. Without principal point offset
+![Without principal point offset](./pics/02_without_principal_point_offset.png)
+
+2. With principal point offset
+![With principal point offset](./pics/02_with_principal_point_offset.png)
+
+This moves the image coordinate system to the corner of the image plane
+
+##### Complete perspective projection model
+
+The complete perspective projection model is given by:
+
+$$\begin{pmatrix}x_s\\y_s\end{pmatrix}=\begin{pmatrix}f_xx_c/z_c+sy_c+c_x\\f_yy_c/z_c+c_y\end{pmatrix} \Leftrightarrow \widetilde{\mathbf{x}}_s=\begin{bmatrix}f_x&s&c_x&0\\0&f_y&c_y&0\\0&0&1&0\end{bmatrix}\overline{\mathbf{x}}_c$$
+
+> - The Matrix $\mathbf{K}=\begin{bmatrix}f_x&s&c_x\\0&f_y&c_y\\0&0&1\end{bmatrix}$ is called the **calibration matrix**.
+> - The parameters of K are called **camera intrinsics** (as opposed to extrinsic pose)
+> - Here, $f_x$ and $f_y$ are independent, allowing for different pixel aspect ratios
+> - The skew parameter $s$ arises due to the sensor not mounted perpendicular to the optical axis
+> - In practice, we often set $s=0$ and $f_x=f_y=f$ to simplify the model
+
+##### Chaining Transformations
+
+Let $\mathbf{K}$ be the calibration matrix (intrinsics) and $\begin{bmatrix}\mathbf{R}&\mathbf{t}\end{bmatrix}$ be the camera pose (extrinsics). We **chain both transformations** to project a point in world coordinates to the image:
+
+$$\widetilde{\mathbf{x}}_s=\begin{bmatrix}\mathbf{K}&\mathbf{0}\end{bmatrix}\overline{\mathbf{x}}_c=\begin{bmatrix}\mathbf{K}&\mathbf{0}\end{bmatrix}\begin{bmatrix}\mathbf{R}&\mathbf{t}\\\mathbf{0}^T&1\end{bmatrix}\overline{\mathbf{x}}_w=\mathbf{K}\begin{bmatrix}\mathbf{R}&\mathbf{t}\end{bmatrix}\overline{\mathbf{x}}_w=\mathbf{P}\overline{\mathbf{x}}_w$$
+
+![Chaining Transformations](./pics/02_Chaining_Transformations.png)
+
+> The matrix $\mathbf{P}=\mathbf{K}\begin{bmatrix}\mathbf{R}&\mathbf{t}\end{bmatrix}$ is called the **camera matrix**, which is a $3 × 4$ matrix, can be precomputed and is used to project 3D points to the image plane.
+
+###### Full Rank Representation
+
+It is sometimes preferable to use a **full rank** 4 × 4 projection matrix:
+
+$$\widetilde{\mathbf{x}}_s=\begin{bmatrix}\mathbf{K}&\mathbf{0}\\\mathbf{0}^T&1\end{bmatrix}\begin{bmatrix}\mathbf{R}&\mathbf{t}\\\mathbf{0}^T&1\end{bmatrix}\overline{\mathbf{x}}_w$$
+
+Now, the homogeneous vector $\widetilde{\mathbf{x}}_s$ is a 4D vector and must be normalized wrt. its 3rd
+entry to obtain inhomogeneous image pixels:
+$$\overline{\mathbf{x}}_s=\frac{\widetilde{\mathbf{x}}_s}{\widetilde{z}_s}= \begin{pmatrix}x_s/z_s & y_s/z_s & 1 & 1/z_s\end{pmatrix}^T$$
+Note that the 4th component of the inhomogeneous 4D vector is the **inverse depth**. If the inverse depth is known, a 3D point can be retrieved from its pixel coordinates via $\widetilde{\mathbf{x}}_w=\mathbf{P}^{-1}\overline{\mathbf{x}}_s$ and subsequent normalization of $\widetilde{\mathbf{x}}$ wrt. its 4th entry.
+
+### Lens Distortion
+
+The assumption of linear projection (straight lines remain straight) is violated in practice due to the properties of the camera lens which introduces distortions. Both **radial and tangential distortion** effects can be modeled relatively easily: Let $x = x_c/z_c, y = y_c/z_c and r^2 = x^2 + y^2$ . The distorted point is obtained as:
+
+$$\mathbf{x}' = (1+\kappa_1r^2+\kappa_2r^4)\begin{pmatrix}x\\y\end{pmatrix}+\begin{pmatrix}2\tau_1xy+\tau_2(r^2+2x^2)\\2\tau_2xy+\tau_1(r^2+2y^2)\end{pmatrix}$$
+
+where $\kappa_1, \kappa_2$ are the radial distortion coefficients and $\tau_1, \tau_2$ are the tangential distortion coefficients.
+
+> Images can be undistorted such that the perspective projection model applies.
+> More complex distortion models must be used for wide-angle lenses (e.g., fisheye).
