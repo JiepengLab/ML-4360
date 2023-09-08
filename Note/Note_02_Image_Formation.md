@@ -368,11 +368,111 @@ Note that the 4th component of the inhomogeneous 4D vector is the **inverse dept
 
 ### Lens Distortion
 
-The assumption of linear projection (straight lines remain straight) is violated in practice due to the properties of the camera lens which introduces distortions. Both **radial and tangential distortion** effects can be modeled relatively easily: Let $x = x_c/z_c, y = y_c/z_c and r^2 = x^2 + y^2$ . The distorted point is obtained as:
+The assumption of linear projection (straight lines remain straight) is violated in practice due to the properties of the camera lens which introduces distortions. Both **radial and tangential distortion** effects can be modeled relatively easily: Let $x = x_c/z_c, y = y_c/z_c$ and $r^2 = x^2 + y^2$ . The distorted point is obtained as:
 
 $$\mathbf{x}' = (1+\kappa_1r^2+\kappa_2r^4)\begin{pmatrix}x\\y\end{pmatrix}+\begin{pmatrix}2\tau_1xy+\tau_2(r^2+2x^2)\\2\tau_2xy+\tau_1(r^2+2y^2)\end{pmatrix}$$
 
 where $\kappa_1, \kappa_2$ are the radial distortion coefficients and $\tau_1, \tau_2$ are the tangential distortion coefficients.
 
 > Images can be undistorted such that the perspective projection model applies.
-> More complex distortion models must be used for wide-angle lenses (e.g., fisheye).
+> Note here, that is practice, this is **already done** before the image is computed. More complex distortion models must be used for wide-angle lenses
+
+## 2.3 Photometric Image Formation
+
+We now discuss how an image is formed in terms of **pixel intensities** and **colors**.
+
+### Rendering Equation
+
+![Rendering Equation](./pics/02_rendering_equation.png)
+
+Let $\mathbf{p} \in \mathbb{R}^3$ denote  a 3D surface point, $\mathbf{v} \in \mathbb{R}^3$ the viewing direction and $\mathbf{s} \in \mathbb{R}^3$ the incoming light direction. The **rendering equation** describes how much of the light $L_{in}$ with wavelength $\lambda$ arriving at $\mathbf{p}$ is reflected into the viewing direction $\mathbf{v}$:
+
+$$L_{out}(\mathbf{p},\mathbf{v},\lambda)=L_{emit}(\mathbf{p},\mathbf{v},\lambda)+\int_{\Omega}BRDF(\mathbf{p},\mathbf{v},\mathbf{s},\lambda)L_{in}(\mathbf{p},\mathbf{s},\lambda)(-\mathbf{n}^T\mathbf{s})d\mathbf{s}$$
+
+> - $\Omega$ is the unit hemisphere at normal $\mathbf{n}$.
+> - $BRDF$ is the **bidirectional reflectance distribution function** defines how light is reflected at an opaque surface(不透明表面), 表示从方向$\mathbf{s}$入射的光有多少**比例**会反射到方向$\mathbf{v}$
+> - $L_{emit} > 0$ only for light emitting surfaces, 描述的是点p作为光源自身发出的光,不依赖于外界的入射光。比如一个发光的球体表面,它自身就会发出光线。
+> - $(-\mathbf{n}^T\mathbf{s})$ attenuation equation (if light arrives exactly perpendicular, there is no reflectance at all. or if it arrives at a shallow angle, there is less light reflected).
+>   - 根据Lambert cosine law,一个表面的反射亮度与光源入射角的余弦值成正比。
+>   - 其实就是$\mathbf{n}$和$\mathbf{s}$的夹角的余弦值。
+>   - 余弦值正号表示光照方向和法线同向,负号表示光照方向和法线反向。加入负号是为了计算光照从背面入射时的正确效果
+
+#### BRDF Components
+
+Typical BRDFs have a **diffuse**(漫反射) and a **specular**(镜面反射) component:
+
+![BRDF Components](./pics/02_BRDF_Components.png)
+
+> - 因为表面不一定是完全光滑的,所以会呈现Specular的效果
+> - The specular component depends strongly on the outgoing light direction.（想想塑料的各个角度的效果）
+
+### BRDF in ractice
+
+#### Fresnel Effect
+
+The specular component can get stronger if the surface is further away because the viewing angle changes (example with the water reflectance). So the amount of relectance depends on the viewing angle.
+
+#### Global Illumination
+
+Modeling one light bounce is insufficient for rendering complex scenes. Light sources can be shadowed by occluders and rays can bounce multiple times. **Global illumination** techniques also take indirect illumination into account.
+
+#### Camera lenses
+
+#### The thin lens model
+
+#### Depth of Field(景深)
+
+#### Chromatic Aberration(色差)
+
+#### Vignetting(晕影)
+
+## Image Sensing Pipeline
+
+![Image Sensing Pipeline](./pics/02_image_sensing_pipeline.png)
+
+The **image sensing pipeline** can be divided into three stages:
+
+- **Physical light transport** in the camera lens/body
+  - Optics(光学) + Aperture(光圈) + Shutter(快门)
+- **Photon measurement and conversion** on the sensor chip(传感器芯片)
+  - Sensor(传感器) + Gain(ISO)(增益) + ADC(模数转换器)
+- **Image signal processing (ISP)** and image compression
+  - Demosaic(去马赛克) + Denoise and sharpen(去噪和锐化) + White balance(白平衡) + Gamma/curve(伽马/曲线) + Compress(压缩)
+
+### Shutter
+
+A **focal plane shutter**(焦平面快门) is positioned just in front the image sensor / film. Most digital cameras use a combination of mechanical and electronic shutter. The shutter speed (exposure time) controls how much light reaches the sensor It determines if an image appears over- (too light)/underexposed (too dark), blurred (motion blur) or noisy.
+
+### Sensor
+
+Two main principles: CCD and CMOS for light sensors.
+**CCDs** move charge from pixel to pixel and convert it to voltage at the output node.
+**CMOS** images convert charge to voltage inside each pixel and are standard today
+
+### Color Filter Arrays
+
+To measure color, pixels are arranged in a **color array**, e.g.: Bayer RGB pattern. Missing colors at each pixel are interpolated from the neighbors (demosaicing)
+
+Each pixel **integrates the light spectrum** $L$ according to its spectral sensitivity $S$:
+
+$$\mathbf{R}=\int_{\lambda}L(\lambda)S_R(\lambda)d\lambda$$
+
+### Different color spaces
+
+RGB: red, green, blue
+L*a*b*: lightness, red-green, blue-yellow
+HSV: hue(色调), saturation(饱和度), value(明度)
+
+### Gamma Compression(伽马压缩)
+
+- Humans are more sensitive to intensity differences in darker regions
+- Therefore, it is beneficial to nonlinearly transform (left) the intensities or colors prior to discretization (left) and to undo this transformation during loading
+
+### Image Compression
+
+- Often images are compressed into a format similar to JPEG.
+- Typically luminance is compressed with higher fidelity than chrominance.
+- Often, (8 × 8 pixel) patch-based discrete cosine or wavelet transforms are used. 
+- -Discrete Cosine Transform (DCT) is an approximation to PCA on natural images. 
+- The coefficients are quantized to integers that can be stored with Huffman codes. 
+- More recently, deep network based compression algorithms are developed (improving the compression a lot compared to DCT)
