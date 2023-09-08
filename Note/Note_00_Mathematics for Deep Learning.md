@@ -97,4 +97,3 @@ $$\arg \min_{x \in \mathcal{X}} f(x) = \{x \in \mathcal{X} | f(x) = \min_{x' \in
 The **argmax** of $f$ is defined as
 
 $$\arg \max_{x \in \mathcal{X}} f(x) = \{x \in \mathcal{X} | f(x) = \max_{x' \in \mathcal{X}} f(x')\}$$
-
