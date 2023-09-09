@@ -416,11 +416,36 @@ The specular component can get stronger if the surface is further away because t
 
 Modeling one light bounce is insufficient for rendering complex scenes. Light sources can be shadowed by occluders and rays can bounce multiple times. **Global illumination** techniques also take indirect illumination into account.
 
-#### Camera lenses
+### Camera lenses
 
 #### The thin lens model
 
+![The thin lens model](./pics/02_the_thin_lens_model.png)
+
+$$\frac{1}{f}=\frac{1}{z_s}+\frac{1}{z_c}$$
+
+> - $f$ is the focal length
+> - $z_s$ is the distance from the lens to the image plane
+> - $z_c$ is the distance from the lens to the object plane
+
+The thin lens model with spherical lens is often used as an approximation.
+Properties: Axis-parallel rays pass the focal point, rays via center keep direction.
+From Snell’s law we obtain $f=\frac{R}{2(n-1)}$ with radius $R$ and index of refraction $n$.
+
 #### Depth of Field(景深)
+
+![Depth of Field](./pics/02_DOF.png)
+
+> 这里的$\Delta z_s$是指在焦平面上的景深范围，是前景和后景的距离。
+
+If the image plane is **out of focus**, a 3D point projects to the **circle of confusion** $c$. The circle of confusion is a little disc - if the disc is larger than the pixel size, we get blur!
+
+The allowable depth variation that limits the circle of confusion $c$ is called depth of field and is a function of both the focus distance and the lens aperture. Typical DSLR cameras have a Depth of Field Indicator which describes the range where the image appears sharply.
+The commonly displayed **f-number** is defined as
+$$ N = \frac{f}{d}$$
+where $f$ is the focal length and $d$ is the diameter of aperture（光圈直径）. The f-number is inversely proportional to the aperture diameter.
+
+To control the **size of the circle of confusion**, we change the lens **aperture**. An aperture is a hole or an opening through which light travels. The aperture limits the amount of light that can reach the image plane. Smaller apertures lead to sharper, but more noisy images (less photons)
 
 #### Chromatic Aberration(色差)
 
@@ -472,7 +497,7 @@ HSV: hue(色调), saturation(饱和度), value(明度)
 
 - Often images are compressed into a format similar to JPEG.
 - Typically luminance is compressed with higher fidelity than chrominance.
-- Often, (8 × 8 pixel) patch-based discrete cosine or wavelet transforms are used. 
-- -Discrete Cosine Transform (DCT) is an approximation to PCA on natural images. 
-- The coefficients are quantized to integers that can be stored with Huffman codes. 
+- Often, (8 × 8 pixel) patch-based discrete cosine or wavelet transforms are used.
+- -Discrete Cosine Transform (DCT) is an approximation to PCA on natural images.
+- The coefficients are quantized to integers that can be stored with Huffman codes.
 - More recently, deep network based compression algorithms are developed (improving the compression a lot compared to DCT)
