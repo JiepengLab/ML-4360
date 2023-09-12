@@ -110,7 +110,7 @@ $$
 记 $y=V^Tx$
 $$
 \begin{align*}
-\|Ax\|^2 &= \|U\Sigma V^Tx\|^2 \\ 
+\|Ax\|^2 &= \|U\Sigma V^Tx\|^2 \\
 &= (U \Sigma V^Tx)^T(U\Sigma V^Tx) \\
 &= x^TV\Sigma^TU^TU\Sigma V^Tx \\
 &= x^TV\Sigma^T\Sigma V^Tx \\
