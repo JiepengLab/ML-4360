@@ -9,7 +9,7 @@
 
 > To infer 3D-information from a collection of (2D) images, it is important to know the intrinsics and extrinsics of the camera setup.
 
-The process of **finding the intrinsic and extrinsic parameters** is konwn as **camera calibration**. Most commonly, a known calibration target is used, such as an image or a checkerboard.
+The process of **finding the intrinsic and extrinsic parameters** is known as **camera calibration**. Most commonly, a known calibration target is used, such as an image or a checkerboard.
 
 - First, this target is **captured in different poses**.
 ![Camera Calibration](./pics/03_pics/03_Camera_Calibration.png)
@@ -305,4 +305,3 @@ Disadvantages:
 Complete feature tracks are required, which means that it cannot handle occlusions of feature points.
 
 ## 3.4 Bundle Adjustment
-

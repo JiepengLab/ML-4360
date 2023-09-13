@@ -1,10 +1,10 @@
-# Image_Formation
+# 2 Image_Formation
 
 ## 2.1 Primitives and Transformations
 
 Geometric primitives(几何图元) are the basic building blocks used to describe 3D shapes, such as points, lines, planes, and polygons.
 
-### 2D Primitives
+### 2.1.1 2D Primitives
 
 #### 2D Points
 
@@ -57,7 +57,7 @@ $$\mathbf{\overline{x}}^T\mathbf{Q}\mathbf{\overline{x}}=0$$
 
 ![conics](./pics/02_pics/02_conic_surface.png)
 
-### 3D Primitives
+### 2.1.2 3D Primitives
 
 #### 3D Points
 
@@ -98,7 +98,7 @@ $$\mathbf{\overline{x}}^T\mathbf{Q}\mathbf{\overline{x}}=0$$
 
 **Superquadrics**: generalization of quadrics
 
-### 2D Transformations
+### 2.1.3 2D Transformations
 
 ![2D transformations](./pics/02_pics/02_2D_Transformations.png)
 
@@ -168,7 +168,7 @@ which implies:
 $$\mathbf{\widetilde{l}'}=\mathbf{H}^{-T}\mathbf{\widetilde{l}}$$
 > Thus, the action of a projective transformation on a co-vector such as a 2D line or 3D normal can be represented by the transposed inverse of the matrix.
 
-#### Overview of 2D Transformations
+### 2.1.4 Overview of 2D Transformations
 
 ![2D transformations](./pics/02_pics/02_2D_Transformations.png)
 
@@ -183,7 +183,7 @@ $$\mathbf{\widetilde{l}'}=\mathbf{H}^{-T}\mathbf{\widetilde{l}}$$
 > - Interpret as restricted $3 × 3$ matrices operating on 2D homogeneous coordinates
 > - Transformations preserve properties below
 
-#### Overview of 3D Transformations
+### 2.1.5 Overview of 3D Transformations
 
 | Transformation | DoF | Preserves | Matrix |
 | :---: | :---: | :---: | :---: |
@@ -197,7 +197,7 @@ $$\mathbf{\widetilde{l}'}=\mathbf{H}^{-T}\mathbf{\widetilde{l}}$$
 > - $3 × 4$ matrices are extended with a fourth $\begin{bmatrix}\mathbf{0}^T&1\end{bmatrix}$ row for homogeneous transforms.
 > - Transformations preserve properties below (similarity: parallelism, straight lines)
 
-#### Direct Linear Transform for Homography Estimation
+### 2.1.6 Direct Linear Transform for Homography Estimation
 
 > 用直接线性变换(DLT)估计单应性矩阵(Homography Matrix)
 
@@ -270,7 +270,7 @@ The solution to the above optimization problem is the **singular vector** corres
 
 ## 2.2 Geometric Image Formation
 
-### Basic camera models
+### 2.2.1 Basic camera models
 
 **Physical Camera Model**
 ![Physical Camera Model](./pics/02_pics/02_physical_camera_model.png)
@@ -278,7 +278,7 @@ The solution to the above optimization problem is the **singular vector** corres
 **Mathematical Camera Model**
 ![Mathematical Camera Model](./pics/02_pics/02_mathematical_camera_model.png)
 
-### Projection models
+### 2.2.2 Projection models
 
 #### Orthographic Projection*
 
@@ -355,7 +355,7 @@ $$\widetilde{\mathbf{x}}_s=\begin{bmatrix}\mathbf{K}&\mathbf{0}\end{bmatrix}\ove
 
 > The matrix $\mathbf{P}=\mathbf{K}\begin{bmatrix}\mathbf{R}&\mathbf{t}\end{bmatrix}$ is called the **camera matrix**, which is a $3 × 4$ matrix, can be precomputed and is used to project 3D points to the image plane.
 
-###### Full Rank Representation
+##### Full Rank Representation
 
 It is sometimes preferable to use a **full rank** 4 × 4 projection matrix:
 
@@ -366,7 +366,7 @@ entry to obtain inhomogeneous image pixels:
 $$\overline{\mathbf{x}}_s=\frac{\widetilde{\mathbf{x}}_s}{\widetilde{z}_s}= \begin{pmatrix}x_s/z_s & y_s/z_s & 1 & 1/z_s\end{pmatrix}^T$$
 Note that the 4th component of the inhomogeneous 4D vector is the **inverse depth**. If the inverse depth is known, a 3D point can be retrieved from its pixel coordinates via $\widetilde{\mathbf{x}}_w=\mathbf{P}^{-1}\overline{\mathbf{x}}_s$ and subsequent normalization of $\widetilde{\mathbf{x}}$ wrt. its 4th entry.
 
-### Lens Distortion
+### 2.2.3 Lens Distortion
 
 The assumption of linear projection (straight lines remain straight) is violated in practice due to the properties of the camera lens which introduces distortions. Both **radial and tangential distortion** effects can be modeled relatively easily: Let $x = x_c/z_c, y = y_c/z_c$ and $r^2 = x^2 + y^2$ . The distorted point is obtained as:
 
@@ -381,7 +381,7 @@ where $\kappa_1, \kappa_2$ are the radial distortion coefficients and $\tau_1, \
 
 We now discuss how an image is formed in terms of **pixel intensities** and **colors**.
 
-### Rendering Equation
+### 2.3.1 Rendering Equation
 
 ![Rendering Equation](./pics/02_pics/02_rendering_equation.png)
 
@@ -406,7 +406,7 @@ Typical BRDFs have a **diffuse**(漫反射) and a **specular**(镜面反射) com
 > - 因为表面不一定是完全光滑的,所以会呈现Specular的效果
 > - The specular component depends strongly on the outgoing light direction.（想想塑料的各个角度的效果）
 
-### BRDF in ractice
+### 2.3.2 BRDF in practice
 
 #### Fresnel Effect
 
@@ -416,7 +416,7 @@ The specular component can get stronger if the surface is further away because t
 
 Modeling one light bounce is insufficient for rendering complex scenes. Light sources can be shadowed by occluders and rays can bounce multiple times. **Global illumination** techniques also take indirect illumination into account.
 
-### Camera lenses
+### 2.3.3 Camera lenses
 
 #### The thin lens model
 
@@ -451,7 +451,7 @@ To control the **size of the circle of confusion**, we change the lens **apertur
 
 #### Vignetting(晕影)
 
-## Image Sensing Pipeline
+## 2.4 Image Sensing Pipeline
 
 ![Image Sensing Pipeline](./pics/02_pics/02_image_sensing_pipeline.png)
 
@@ -464,17 +464,17 @@ The **image sensing pipeline** can be divided into three stages:
 - **Image signal processing (ISP)** and image compression
   - Demosaic(去马赛克) + Denoise and sharpen(去噪和锐化) + White balance(白平衡) + Gamma/curve(伽马/曲线) + Compress(压缩)
 
-### Shutter
+### 2.4.1 Shutter
 
 A **focal plane shutter**(焦平面快门) is positioned just in front the image sensor / film. Most digital cameras use a combination of mechanical and electronic shutter. The shutter speed (exposure time) controls how much light reaches the sensor It determines if an image appears over- (too light)/underexposed (too dark), blurred (motion blur) or noisy.
 
-### Sensor
+### 2.4.2 Sensor
 
 Two main principles: CCD and CMOS for light sensors.
 **CCDs** move charge from pixel to pixel and convert it to voltage at the output node.
 **CMOS** images convert charge to voltage inside each pixel and are standard today
 
-### Color Filter Arrays
+### 2.4.3 Color Filter Arrays
 
 To measure color, pixels are arranged in a **color array**, e.g.: Bayer RGB pattern. Missing colors at each pixel are interpolated from the neighbors (demosaicing)
 
@@ -482,18 +482,18 @@ Each pixel **integrates the light spectrum** $L$ according to its spectral sensi
 
 $$\mathbf{R}=\int_{\lambda}L(\lambda)S_R(\lambda)d\lambda$$
 
-### Different color spaces
+### 2.4.4 Different color spaces
 
 RGB: red, green, blue
 L*a*b*: lightness, red-green, blue-yellow
 HSV: hue(色调), saturation(饱和度), value(明度)
 
-### Gamma Compression(伽马压缩)
+### 2.4.5 Gamma Compression(伽马压缩)
 
 - Humans are more sensitive to intensity differences in darker regions
 - Therefore, it is beneficial to nonlinearly transform (left) the intensities or colors prior to discretization (left) and to undo this transformation during loading
 
-### Image Compression
+### 2.4.6 Image Compression
 
 - Often images are compressed into a format similar to JPEG.
 - Typically luminance is compressed with higher fidelity than chrominance.
